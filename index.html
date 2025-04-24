@@ -1,295 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepak Kumar – Portfolio</title>
+  <!-- Google Font  -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font‑Awesome -->
+  <script src="https://kit.fontawesome.com/58a810656e.js" crossorigin="anonymous"></script>
+  <!-- Typed.js  -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <style>
+    /* ======================= RESET ======================= */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      color: #1f1f1f;
+    }
+
+    :root {
+      --clr-accent: #e84949;
+      --clr-dark: #343d68;
+      --clr-light: rgb(231, 231, 231);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ======================= LAYOUT ======================= */
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      width: min(1200px, 90%);
+      margin-inline: auto;
+    }
+
+    /* ======================= NAV ======================= */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-block: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .logo img {
+      width: 44px;
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--clr-accent);
+    }
+
+    /* ======================= HERO ======================= */
+    .hero {
+      display: grid;
+      gap: 4rem;
+      align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      padding-block: 5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--clr-dark);
+    }
+
+    .hero h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 600;
+      color: #555;
+    }
+
+    .accent {
+      color: var(--clr-accent);
+    }
+
+    .hero p {
+      margin-top: 1rem;
+      max-width: 480px;
+      color: #444;
+    }
+
+    .btn {
+      background: var(--clr-accent);
+      border: none;
+      color: #fff;
+      padding: 0.9rem 2.4rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 4px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 2rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-img {
+      position: relative;
+      justify-self: center;
+    }
+
+    .hero-img img {
+      border-radius: 50%;
+      width: 260px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      filter: grayscale(0.15);
+    }
+
+    /* Decorative shapes */
+    .shape {
+      position: absolute;
+      z-index: -1;
+    }
+
+    /* ======================= SECTION HEADING ======================= */
+    .section-title {
+      text-align: center;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      color: var(--clr-accent);
+      margin-bottom: 1rem;
+    }
+
+    /* ======================= PROJECTS ======================= */
+    .projects {
+      background: var(--clr-light);
+      padding-block: 5rem;
+    }
+
+    .project-grid {
+      display: grid;
+      gap: 4rem;
+    }
+
+    @media (min-width: 700px) {
+      .project-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+      background: #000;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .project-image {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+
+    .project-content {
+      position: absolute;
+      inset: 0;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      backdrop-filter: blur(4px);
+      background: linear-gradient(transparent 20%, rgba(0, 0, 0, 0.7));
+      color: #fff;
+    }
+
+    .project-content h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .project-content p {
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+      opacity: 0.9;
+    }
+
+    .project-links {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .project-links a i {
+      font-size: 1.3rem;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+
+    .project-links a:hover i {
+      color: var(--clr-accent);
+    }
+
+    /* ======================= SKILLS ======================= */
+    .skills {
+      padding-block: 5rem;
+    }
+
+    .skill-list {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 2rem 1.5rem;
+      justify-items: center;
+    }
+
+    .skill-item {
+      width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      text-align: center;
+    }
+    .skill-item img {
+      width: 100%;
+    }
+
+    /* ======================= CONTACT ======================= */
+    .contact {
+      background: var(--clr-light);
+      padding-block: 5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 2rem;
+      max-width: 700px;
+      margin-inline: auto;
+    }
+
+    .form-field {
+      padding: 0.9rem 1.1rem;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      justify-self: start;
+    }
+
+    /* ======================= FOOTER ======================= */
+    footer {
+      background: var(--clr-dark);
+      color: #fff;
+      padding: 3rem 0 2rem;
+      margin-top: auto;
+    }
+
+    .footer-flex {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.6rem;
+    }
+
+    .social-icons a:hover {
+      color: var(--clr-accent);
+    }
+  </style>
 </head>
 <body>
-    <div id="wrapper">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo-container">
-                    <img src="images/logo.jpg" class="logo" alt="D">
-                    <div class="logo-text">eepak Kumar</div>
-                </div>
-                <div class="nav-items">
-                    <div><a href="#projects">Projects</a></div>
-                    <div><a href="#skills">Skills</a></div>
-                    <div><a href="#contactme">Contact Me</a></div>
-                </div>
+  <div class="wrapper" id="home">
+    <!-- ========== NAVBAR ========== -->
+    <header class="container navbar">
+      <div class="logo">
+        <img src="images/user.jpg" alt="Deepak Kumar" />
+        Deepak&nbsp;<span class="accent">Kumar</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="container hero">
+      <div>
+        <h1>Hi, I’m <span class="accent">Deepak&nbsp;Kumar</span></h1>
+        <h2>I am a <span class="right-prof accent"></span></h2>
+        <p>
+          Software Engineer in the making (B.E.
+          ISE, BMSCE – 2025) who loves turning ideas into scalable products. MERN‑stack
+          dev by day, computer‑vision tinkerer by night.
+        </p>
+        <a class="btn" href="#contact">Hire&nbsp;Me</a>
+      </div>
+      <div class="hero-img">
+        <span class="shape" style="top:-20px;right:-20px;"><img src="images/cube.png" width="60" /></span>
+        <img src="images/user.jpg" alt="Deepak Kumar" />
+        <span class="shape" style="bottom:-25px;left:-25px;"><img src="images/zigzags.png" width="70" /></span>
+      </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section id="projects" class="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="container project-grid">
+        <!-- Project 1 -->
+        <article class="project-card">
+          <img class="project-image" src="images/Project1.png" alt="StudyMaster" />
+          <div class="project-content">
+            <h3>StudyMaster – Global&nbsp;Ed‑Tech</h3>
+            <p>Full‑stack MERN platform with auth, CMS & payments; boosted engagement by 30%.</p>
+            <div class="project-links">
+              <a href="https://study-master.vercel.app/" target="_blank" title="Live Demo"><i class="fa-solid fa-link"></i></a>
+              <a href="https://github.com/DeepakKr100" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
             </div>
+          </div>
+        </article>
+        <!-- Project 2 -->
+        <article class="project-card">
+          <img class="project-image" src="images/Project2.png" alt="Face&nbsp;Recognition" />
+          <div class="project-content">
+            <h3>Face Recognition & Liveness</h3>
+            <p>95% accurate real‑time system using OpenCV; slashed false positives by 35%.</p>
+            <div class="project-links">
+              <a href="https://github.com/DeepakKr100/Face_Recognition_and_Liveness_Detection" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+          </div>
+        </article>
+        <!-- Project 3 -->
+        <article class="project-card">
+          <img class="project-image" src="images/Project3.png" alt="Bank Loan Predictor" />
+          <div class="project-content">
+            <h3>Bank Loan Default Predictor</h3>
+            <p>Streamlit app predicting loan eligibility with 90% accuracy; cut manual work 40%.</p>
+            <div class="project-links">
+              <a href="https://bankloandefaultpredictor.streamlit.app/" target="_blank"><i class="fa-solid fa-link"></i></a>
+            </div>
+          </div>
+        </article>
+        <!-- Project 4 -->
+        <article class="project-card">
+          <img class="project-image" src="images/Project4.png" alt="CommerceCraft" />
+          <div class="project-content">
+            <h3>CommerceCraft Framework</h3>
+            <p>MERN blueprint for scalable e‑commerce stores; modular architecture & tests.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills" class="skills container">
+      <h2 class="section-title">Tech&nbsp;Stack</h2>
+      <div class="skill-list">
+        <!-- List core skills with tiny icons -->
+        <div class="skill-item"><img src="images/HTML.png" alt="HTML" />HTML5</div>
+        <div class="skill-item"><img src="images/CSS.png" alt="CSS" />CSS3/Tailwind</div>
+        <div class="skill-item"><img src="images/Javascript.svg" alt="JS" />JavaScript</div>
+        <div class="skill-item"><img src="images/React.png" alt="React" />React</div>
+        <div class="skill-item"><img src="images/NodeJs.svg" alt="Node" />Node.js</div>
+        <div class="skill-item"><img src="images/Express.png" alt="Express" />Express</div>
+        <div class="skill-item"><img src="images/MongoDB.svg" alt="MongoDB" />MongoDB</div>
+        <div class="skill-item"><img src="images/Python.png" alt="Python" />Python</div>
+        <div class="skill-item"><img src="images/Git.svg" alt="Git" />Git</div>
+        <div class="skill-item"><img src="images/Docker.svg" alt="Docker" />Docker</div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="contact">
+      <h2 class="section-title">Get&nbsp;in&nbsp;Touch</h2>
+      <form class="container contact-grid" action="https://formspree.io/f/maypzwvl" method="POST">
+        <input class="form-field" type="text" name="name" placeholder="Your Name" required />
+        <input class="form-field" type="email" name="email" placeholder="Your Email" required />
+        <textarea class="form-field" name="message" rows="6" placeholder="Your Message"></textarea>
+        <button type="submit" class="btn submit-btn">Send&nbsp;Message <i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+      <div class="container footer-flex">
+        <p>&copy; 2025 Deepak Kumar • Open‑sourced on GitHub</p>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com/in/kumar-deepak-sah/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/DeepakKr100" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="mailto:kumardeepak.workspace@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
         </div>
+      </div>
+    </footer>
+  </div>
 
-        <div class="introduction">
-            <div class="faded-text">Deepak Kumar</div>
-            <div class="left-intro">
-                <div class="intro-heading">Hi! Deepak Kumar</div>
-                <div class="intro-heading intro-subheading">I am a 
-                    <span class="right-prof"></span>
-                </div>
-                <div class="intro-desc">
-                    I'm a software developer and here is my portfolio website. Here you'll learn about my journey as a software developer.
-                </div>
-                <div class="btn"><a href="#">Hire Me</a></div>
-            </div>
-            <div class="right-intro">
-                <div class="absolute icons icon-dots">
-                    <img src="images/dots.png" alt="">
-                </div>
-                <div class="absolute icons icon-cube">
-                    <img src="images/cube.png" alt="">
-                </div>
-                <div class="absolute icons icon-circle">
-                    <img src="images/circle.png" alt="">
-                </div>    
-                <div class="absolute icons icon-zigzag">
-                    <img src="images/zigzags.png" alt="">
-                </div>
-                <div class="absolute icons icon-plus">
-                    <img src="images/plus.png" alt="">
-                </div>
-                <div class="user-image">
-                    <img src="images/user.jpg" alt="">
-               </div> 
-                    
-                
-            </div>
-        </div>
-
-        <div class="project-section" id="projects">
-            <h2 class="page-header">Projects</h2>
-            
-            <div class="project-container">
-
-                <div class="project-card" id="project1">
-                    <div class="project-number project-number-right">01</div>
-                    <div class="project-content project-content-left">
-                        <div class="project-skills-container">
-                            <img class="project-skill" src="images/HTML.png" alt="">
-                            <img class="project-skill" src="images/CSS.png" alt="">
-                            <img class="project-skill" src="images/Javascript.svg" alt="">
-                            <img class="project-skill" src="images/Express.png" alt="">
-                            <img class="project-skill" src="images/NextJsCircle.png" alt="">
-                            <img class="project-skill" src="images/Tailwind.png" alt="">
-                            <img class="project-skill" src="images/NodeJs.svg" alt="">
-                            <img class="project-skill" src="images/MongoDB.svg" alt="">
-                            <img class="project-skill" src="images/Redux.svg" alt="">
-                            <img class="project-skill" src="images/Vercel.svg" alt="">
-                        </div>
-                        <h2 class="project-heading">Face Recognition and Liveness Detection</h2>
-                        <div class="project-subHeading">It's a car modification company which provide you sheets to protect your car from scratches</div>
-                        <div class="btn-grp">
-                            <button class="btn btn-project">Read More</button>
-                            <a href="#">
-                                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
-                            </a>
-                            <a href="#">
-                                <i title="Live Link" class="fa-solid fa-link icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" id="project2">
-                    <div class="project-number project-number-left">02</div>
-                    <div class="project-content project-content-right">
-                        <div class="project-skills-container">
-                            <img class="project-skill" src="images/HTML.png" alt="">
-                            <img class="project-skill" src="images/CSS.png" alt="">
-                            <img class="project-skill" src="images/Javascript.svg" alt="">
-                            <img class="project-skill" src="images/Express.png" alt="">
-                            <img class="project-skill" src="images/NextJsCircle.png" alt="">
-                            <img class="project-skill" src="images/Tailwind.png" alt="">
-                            <img class="project-skill" src="images/NodeJs.svg" alt="">
-                            <img class="project-skill" src="images/MongoDB.svg" alt="">
-                            <img class="project-skill" src="images/Redux.svg" alt="">
-                            <img class="project-skill" src="images/Vercel.svg" alt="">
-                        </div>
-                        <h2 class="project-heading">Breaking Copyrights</h2>
-                        <div class="project-subHeading">It's a car modification company which provide you sheets to protect your car from scratches</div>
-                        <div class="btn-grp">
-                            <button class="btn btn-project">Read More</button>
-                            <a href="#">
-                                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
-                            </a>
-                            <a href="#">
-                                <i title="Live Link" class="fa-solid fa-link icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" id="project3">
-                    <div class="project-number project-number-right">03</div>
-                    <div class="project-content project-content-left">
-                        <div class="project-skills-container">
-                            <img class="project-skill" src="images/HTML.png" alt="">
-                            <img class="project-skill" src="images/CSS.png" alt="">
-                            <img class="project-skill" src="images/Javascript.svg" alt="">
-                            <img class="project-skill" src="images/Express.png" alt="">
-                            <img class="project-skill" src="images/NextJsCircle.png" alt="">
-                            <img class="project-skill" src="images/Tailwind.png" alt="">
-                            <img class="project-skill" src="images/NodeJs.svg" alt="">
-                            <img class="project-skill" src="images/MongoDB.svg" alt="">
-                            <img class="project-skill" src="images/Redux.svg" alt="">
-                            <img class="project-skill" src="images/Vercel.svg" alt="">
-                        </div>
-                        <h2 class="project-heading">Tint & Orange</h2>
-                        <div class="project-subHeading">It's a car modification company which provide you sheets to protect your car from scratches</div>
-                        <div class="btn-grp">
-                            <button class="btn btn-project">Read More</button>
-                            <a href="#">
-                                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
-                            </a>
-                            <a href="#">
-                                <i title="Live Link" class="fa-solid fa-link icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" id="project4">
-                    <div class="project-number project-number-left">04</div>
-                    <div class="project-content project-content-right">
-                        <div class="project-skills-container">
-                            <img class="project-skill" src="images/HTML.png" alt="">
-                            <img class="project-skill" src="images/CSS.png" alt="">
-                            <img class="project-skill" src="images/Javascript.svg" alt="">
-                            <img class="project-skill" src="images/Express.png" alt="">
-                            <img class="project-skill" src="images/NextJsCircle.png" alt="">
-                            <img class="project-skill" src="images/Tailwind.png" alt="">
-                            <img class="project-skill" src="images/NodeJs.svg" alt="">
-                            <img class="project-skill" src="images/MongoDB.svg" alt="">
-                            <img class="project-skill" src="images/Redux.svg" alt="">
-                            <img class="project-skill" src="images/Vercel.svg" alt="">
-                        </div>
-                        <h2 class="project-heading">Tint & Orange</h2>
-                        <div class="project-subHeading">It's a car modification company which provide you sheets to protect your car from scratches</div>
-                        <div class="btn-grp">
-                            <button class="btn btn-project">Read More</button>
-                            <a href="#">
-                                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
-                            </a>
-                            <a href="#">
-                                <i title="Live Link" class="fa-solid fa-link icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            
-        </div>
-
-        <div id="skills" class="container skills-container">
-            <div class="skill-fade-text">Skills</div>
-            <div class="skills-container-left">
-                <h2 class="skill-heading">
-                <span class="caps">M</span>e and<br>MyTech Stack</h2>
-                <div class="skill-subHeading">
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, adipisci suscipit delectus sit optio consequatur, laboriosam quo obcaecati quis, quasi sed praesentium eligendi. Molestiae rerum tempore quia facilis, eaque excepturi?
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, adipisci suscipit delectus sit optio consequatur, laboriosam quo obcaecati quis, quasi sed praesentium eligendi. Molestiae rerum tempore quia facilis, eaque excepturi?
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, adipisci suscipit delectus sit optio consequatur, laboriosam quo obcaecati quis, quasi sed praesentium eligendi. Molestiae rerum tempore quia facilis, eaque excepturi?
-                    </p>
-                </div>
-            </div>
-            <div class="skills-container-right">
-                <img src="./images/blob vector.png" class="blob-style" alt="" />
-                <img src="./images/HTML.png" alt="" class="skillsLogo" />
-                <img src="./images/CSS.png" alt="" class="skillsLogo" />
-                <img src="./images/Javascript.svg" alt="" class="skillsLogo" />
-                <img src="./images/React.png" alt="" class="skillsLogo" />
-                <img src="./images/NodeJs.svg" alt="" class="skillsLogo" />
-                <img src="./images/Next.svg" alt="" class="skillsLogo" />
-                <img src="./images/Redux.svg" alt="" class="skillsLogo" />
-                <img src="./images/Tailwind.png" alt="" class="skillsLogo" />
-                <img src="./images/Bootstrap.svg" alt="" class="skillsLogo" />
-                <img src="./images/MaterialUI.svg" alt="" class="skillsLogo" />
-                <img src="./images/Express.png" alt="" class="skillsLogo" />
-                <img src="./images/Git.svg" alt="" class="skillsLogo" />
-                <img src="./images/Github.svg" alt="" class="skillsLogo" />
-                <img src="./images/Graphql.svg" alt="" class="skillsLogo" />
-                <img src="./images/MongoDB.svg" alt="" class="skillsLogo" />
-                <img src="./images/Vercel.svg" alt="" class="skillsLogo" />
-                <img src="./images/ChartJs.svg" alt="" class="skillsLogo" />
-                <img src="./images/Bash.svg" alt="" class="skillsLogo" />
-                <img src="./images/Docker.svg" alt="" class="skillsLogo" />
-                <img src="./images/K8s.svg" alt="" class="skillsLogo" />
-            </div>
-        </div>
-
-        <div class="contactus-form-container" id="contactme">
-            <div class="container">
-                <h1 class="contactus-heading">Contact Me</h1>
-                <h3 class="contactus-sub-heading">
-                    Questions, Thoughts, or just want to say Hello!
-                </h3>
-                <div class="contactus-form-container">
-                    <form class="form" action="">
-                        <div class="formfield-container">
-                            <input class="formfield" type="text" name="name" id="" placeholder="Enter your name"/>
-                            <input class="formfield" type="emailt" name="email" id="" placeholder="Enter your email address"/>
-                            <input class="formfield" type="text" name="subject" id="" placeholder="Enter your subject"/>
-                            <textarea class="formfield formfield-textarea" name="message" id="" cols="30" rows="10" placeholder="Enter your message"></textarea>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn" id="submit-btn">
-                                Send Messsage<i class="submit-icon fa-solid fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <div class="container">
-                <div class="footer-wrapper">
-                    <div class="footer-faded-text">Deepak Kumar</div>
-                    <div class="link-wrapper">
-                        <div>
-                            <a href="#projects">Projects</a>
-                        </div>
-                        <div>
-                            <a href="#skills">Skills</a>
-                        </div>
-                        <div>
-                            <a href="#contactme">Contact Me</a>
-                        </div>
-                    </div>
-                    <div class="icon-wrapper">
-                        <i class="fa-brands fa-linkedin icon"></i>
-                        <i class="fa-brands fa-github icon"></i>
-                        <i class="fa-brands fa-twitter icon"></i>
-                        <i class="fa-brands fa-instagram icon"></i>
-                        <i class="fa-brands fa-envelope icon"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="https://kit.fontawesome.com/58a810656e.js" crossorigin="anonymous"></script>
-    <script>
-        var typeData = new Typed(".right-prof", {
-          strings: [
-            "Full Stack Web Developer",
-            "Android App Developer",
-            "Coder",
-          ],
-          loop: true,
-          typeSpeed: 100,
-          backSpeed: 80,
-          backDelay: 1000,
-        });
-    </script>
+  <!-- ========== TYPED INITIALISATION ========== -->
+  <script>
+    new Typed(".right-prof", {
+      strings: [
+        "Full‑Stack MERN Developer",
+        "Computer‑Vision Enthusiast",
+        "ML Practitioner",
+      ],
+      typeSpeed: 100,
+      backSpeed: 60,
+      backDelay: 1000,
+      loop: true,
+    });
+  </script>
 </body>
 </html>
